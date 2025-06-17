@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request, redirect, url_for, flash
+from werkzeug.utils import secure_filename
 from summarizer import summarize_text_from_pdf
 import os
 
@@ -20,15 +21,24 @@ def index():
         if 'document' not in request.files:
             flash('No file part', 'danger')
             return redirect(request.url)
+
         file = request.files['document']
         if file.filename == '':
             flash('No selected file', 'danger')
             return redirect(request.url)
         if file and allowed_file(file.filename):
+            filename = secure_filename(file.filename)
             filepath = os.path.join(app.config['UPLOAD_FOLDER'], file.filename)
             file.save(filepath)
-            summary = summarize_text_from_pdf(filepath)
+
+            file_ext = filename.rsplit('.', 1)[1].lower()
+            if file_ext == 'pdf':
+                summary = summarize_text_from_pdf(filepath)
+            else:
+                summary = summarize_text_from_pdf(filepath)
+
             return render_template('result.html', summary=summary)
+
         else:
             flash('Allowed file types are pdf, txt', 'danger')
             return redirect(request.url)
