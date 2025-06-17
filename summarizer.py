@@ -1,8 +1,10 @@
 import pdfplumber
 from transformers import pipeline
+import torch
 
+device = torch.device('cpu')
 # Initialize summarizer pipeline once
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn")
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn", device =-1)
 
 def extract_text_from_pdf(pdf_path):
     text = ""
@@ -18,18 +20,17 @@ def chunk_text(text, max_length=1000):
         yield " ".join(words[i:i+max_length])
 
 def summarize_text_from_pdf(filepath):
-    if filepath.endswith('.txt'):
-        with open(filepath, 'r', encoding='utf-8') as f:
-            text = f.read()
-    else:
-        text = extract_text_from_pdf(filepath)
-    text = text.replace('\n', ' ').strip()
+    import PyPDF2
 
-    chunks = list(chunk_text(text))
-    summaries = []
-    for chunk in chunks:
-        summary = summarizer(chunk, max_length=150, min_length=40, do_sample=False)[0]['summary_text']
-        summaries.append(summary)
-    # Combine summaries for a final summary
-    final_summary = " ".join(summaries)
-    return final_summary
+    with open(filepath, 'rb') as f:
+        reader = PyPDF2.PdfReader(f)
+        text = ''
+        for page in reader.pages:
+            text += page.extract_text()
+
+    # Optionally limit text size for summarizer model
+    max_length = 1024  # model-dependent
+    input_text = text[:4000]  # truncate if too long
+
+    summary = summarizer(input_text, max_length=150, min_length=40, do_sample=False)
+    return summary[0]['summary_text']
