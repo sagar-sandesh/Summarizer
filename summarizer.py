@@ -1,36 +1,45 @@
 import pdfplumber
 from transformers import pipeline
 import torch
+from transformers.utils import logging
 
+# Suppress unnecessary logging
+logging.set_verbosity_error()
+
+# Force CPU usage
 device = torch.device('cpu')
-# Initialize summarizer pipeline once
-summarizer = pipeline("summarization", model="facebook/bart-large-cnn", device =-1)
+
+# Initialize summarizer pipeline
+summarizer = pipeline("summarization", model="facebook/bart-large-cnn", device=-1)
 
 def extract_text_from_pdf(pdf_path):
     text = ""
     with pdfplumber.open(pdf_path) as pdf:
         for page in pdf.pages:
-            text += page.extract_text() + "\n"
+            extracted = page.extract_text()
+            if extracted:
+                text += extracted + "\n"
     return text
 
 def chunk_text(text, max_length=1000):
-    # Split text into chunks of max_length tokens approx
     words = text.split()
     for i in range(0, len(words), max_length):
         yield " ".join(words[i:i+max_length])
 
 def summarize_text_from_pdf(filepath):
-    import PyPDF2
+    # Use pdfplumber instead of PyPDF2 (better accuracy and consistency)
+    text = extract_text_from_pdf(filepath)
 
-    with open(filepath, 'rb') as f:
-        reader = PyPDF2.PdfReader(f)
-        text = ''
-        for page in reader.pages:
-            text += page.extract_text()
+    if not text.strip():
+        return "No extractable text found in the document."
 
-    # Optionally limit text size for summarizer model
-    max_length = 1024  # model-dependent
-    input_text = text[:4000]  # truncate if too long
+    chunks = list(chunk_text(text, max_length=1000))
+    summaries = []
 
-    summary = summarizer(input_text, max_length=150, min_length=40, do_sample=False)
-    return summary[0]['summary_text']
+    for chunk in chunks:
+        if len(chunk.strip()) == 0:
+            continue
+        summary = summarizer(chunk, max_length=150, min_length=40, do_sample=False)
+        summaries.append(summary[0]['summary_text'])
+
+    return "\n\n".join(summaries)
