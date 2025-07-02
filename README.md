@@ -32,4 +32,25 @@ Whether you're a job seeker preparing for an application or a recruiter filterin
 ---
 
 ## 📂 Project Structure
+resume-analyzer/
+- ├── app.py # Main Flask application with route handling
+- ├── analyzer.py # Resume-job description analyzer using NLP
+- ├── resume_parser.py # Extracts raw text from uploaded PDF resumes
+- ├── templates/
+- │ ├── index.html # Upload form and job description input page
+- │ └── result.html # Displays similarity score and suggestions
+- ├── static/ # (Optional) For custom CSS/JS
+- └── requirements.txt # List of required Python libraries
 
+
+---
+
+## ⚙️ Installation & Setup Instructions
+
+Follow these steps to run the app locally:
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/yourusername/resume-analyzer.git
+cd resume-analyzer
