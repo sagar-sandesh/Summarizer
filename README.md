@@ -53,35 +53,39 @@ Follow these steps to run the app locally:
 
 ### 1. Clone the Repository
 
-bash
+```bash
 git clone https://github.com/yourusername/resume-analyzer.git
 cd resume-analyzer
-
+```
 ----
 ### 2. Set Up a Virtual Environment
 
+```bash
 python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
- 
+ ```
 ----
 ### 3. Install the Required Dependencies
 
+```bash
 pip install -r requirements.txt
-
+```
 ----
 
 ### 4. Download the spaCy Language Model
 
+```bash
 python -m spacy download en_core_web_sm
-
+```
 ----
 
 ### ▶️ Run the App
 
+```bash
 python app.py
 
 Then open your browser and go to: http://127.0.0.1:5000
-
+```
 ----
 
 ### 👨‍💻 How It Works
