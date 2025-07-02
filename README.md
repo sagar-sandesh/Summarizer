@@ -49,8 +49,69 @@ resume-analyzer/
 
 Follow these steps to run the app locally:
 
+----
+
 ### 1. Clone the Repository
 
-```bash
+bash
 git clone https://github.com/yourusername/resume-analyzer.git
 cd resume-analyzer
+
+----
+### 2. Set Up a Virtual Environment
+
+python -m venv venv
+source venv/bin/activate  # On Windows: venv\Scripts\activate
+ 
+----
+### 3. Install the Required Dependencies
+
+pip install -r requirements.txt
+
+----
+
+### 4. Download the spaCy Language Model
+
+python -m spacy download en_core_web_sm
+
+----
+
+### ▶️ Run the App
+
+python app.py
+
+Then open your browser and go to: http://127.0.0.1:5000
+
+### 👨‍💻 How It Works
+
+1. Upload Resume: User uploads a PDF version of their resume.
+
+2.Job Description Input: User enters the job description in a textarea form.
+
+3.Text Extraction: The app extracts text from the resume using pdfminer.six.
+
+4.Keyword Extraction: spaCy processes both texts and extracts relevant keywords (removing stopwords and punctuation).
+
+5.Similarity Analysis: scikit-learn’s CountVectorizer and cosine_similarity compare both keyword sets.
+
+6.Results:
+
+ - Similarity Score: Percent match between resume and job description.
+
+  -Missing Skills: Top skills from the job description that are not found in the resume.
+
+- Suggestions: Actionable suggestions to include specific keywords in the resume.
+
+### 💡 Future Enhancements (Ideas)
+
+- Allow uploading of .docx resumes
+
+- Add resume scoring history for users
+
+- User authentication and saving previous analyses
+
+- Visual charts for matching metrics
+
+- Advanced keyword tagging using ML/NER
+
+### 📜 License
