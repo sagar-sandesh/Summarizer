@@ -33,14 +33,14 @@ Whether you're a job seeker preparing for an application or a recruiter filterin
 
 ## 📂 Project Structure
 resume-analyzer/
-- ├── app.py # Main Flask application with route handling
-- ├── analyzer.py # Resume-job description analyzer using NLP
-- ├── resume_parser.py # Extracts raw text from uploaded PDF resumes
+- ├── app.py 
+- ├── analyzer.py 
+- ├── resume_parser.py 
 - ├── templates/
-- │ ├── index.html # Upload form and job description input page
-- │ └── result.html # Displays similarity score and suggestions
-- ├── static/ # (Optional) For custom CSS/JS
-- └── requirements.txt # List of required Python libraries
+- │ ├── index.html 
+- │ └── result.html 
+- ├── static/ 
+- └── requirements.txt 
 
 
 ---
@@ -134,4 +134,9 @@ and license notice are included in all copies or substantial portions of the sof
 
 See the [LICENSE](LICENSE) file for full details.
 ```
+## 👤 Author
+Mr. Sagar Sandesh Oli
 
+📧 olisagarsandesh@gmail.com
+
+📍 Based in Finland 🇫🇮 | Originally from Nepal 🇳🇵
