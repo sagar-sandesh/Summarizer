@@ -1,6 +1,6 @@
-# 🧠 Resume Analyzer Web App
+# 🧠 A summarizer Web App
 
-The **Resume Analyzer Web App** is a smart, lightweight web application that evaluates how well a candidate’s resume matches a given job description. It uses Natural Language Processing (NLP) to extract and compare keywords, providing a **similarity score**, a list of **missing skills**, and **personalized suggestions** for improvement.
+The **A summarizer Web App** is a smart, lightweight web application that evaluates how well a candidate’s resume matches a given job description. It uses Natural Language Processing (NLP) to extract and compare keywords, providing a **similarity score**, a list of **missing skills**, and **personalized suggestions** for improvement.
 
 Whether you're a job seeker preparing for an application or a recruiter filtering resumes, this tool offers quick and intelligent insights.
 
