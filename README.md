@@ -89,9 +89,8 @@ python -m spacy download en_core_web_sm
 
 ```bash
 python app.py
-
-Then open your browser and go to: http://127.0.0.1:5000
 ```
+Then open your browser and go to: http://127.0.0.1:5000
 ----
 
 ### 👨‍💻 How It Works
