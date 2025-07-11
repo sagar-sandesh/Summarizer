@@ -9,11 +9,17 @@ Whether you're a job seeker preparing for an application or a recruiter filterin
 ## 📌 Key Features
 
 **✅ Upload PDF Resume**
-**✅ Paste Job Description Text** 
+
+**✅ Paste Job Description Text**
+
 **✅ Intelligent Keyword Extraction using spaCy**
+
 **✅ Similarity Score using Cosine Similarity (scikit-learn)**
+
 **✅ Missing Skills Highlighter** 
+
 **✅ Improvement Suggestions (Top 10 missing keywords)**
+
 **✅ Clean & User-Friendly Web Interface**
 
 ---
